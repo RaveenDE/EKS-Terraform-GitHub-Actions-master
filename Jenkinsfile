@@ -24,14 +24,14 @@ pipeline {
         }
         stage('Init') {
             steps {
-                withAWS(credentials: 'aws-creds', region: 'us-east-1') {
+                withAWS(credentials: 'aws-cred', region: 'us-east-1') {
                 sh 'terraform -chdir=eks/ init'
                 }
             }
         }
         stage('Validate') {
             steps {
-                withAWS(credentials: 'aws-creds', region: 'us-east-1') {
+                withAWS(credentials: 'aws-cred', region: 'us-east-1') {
                 sh 'terraform -chdir=eks/ validate'
                 }
             }
