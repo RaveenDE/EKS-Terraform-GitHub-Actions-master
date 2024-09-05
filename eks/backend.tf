@@ -29,6 +29,10 @@ resource "aws_dynamodb_table" "terraform_lock" {
     type = "S"
   }
 
+  lifecycle {
+    prevent_destroy = true
+  }
+
   tags = {
     Name = "Terraform Lock Table"
   }
