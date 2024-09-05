@@ -7,7 +7,7 @@ terraform {
     }
   }
   backend "s3" {
-    bucket         = "my-aws-baket1"
+    bucket         = "my-ews-baket1"
     region         = "us-east-1"
     key            = "eks/terraform.tfstate"
     dynamodb_table = "Lock-Files"
@@ -17,23 +17,4 @@ terraform {
 
 provider "aws" {
   region  = var.aws-region
-}
-
-resource "aws_dynamodb_table" "terraform_lock" {
-  name           = "Lock-Files"
-  billing_mode   = "PAY_PER_REQUEST"
-  hash_key       = "LockID"
-
-  attribute {
-    name = "LockID"
-    type = "S"
-  }
-
-  lifecycle {
-    prevent_destroy = true
-  }
-
-  tags = {
-    Name = "Terraform Lock Table"
-  }
 }
